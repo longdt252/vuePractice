@@ -1,16 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+      <div class="row">
+        <Header :propsMaxItem="maxItem" :propsItemCount="items.length"></Header>
+      </div>
+      <div class="row">
+        <AddItem @item-added="addItemParent" :propsItems="items"></AddItem>
+        <ItemsLayout :propsItems="items" @deleted-item="delItem"></ItemsLayout>
+      </div>
+  </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue';
+import ItemsLayout from './components/ItemsLayout.vue';
+import AddItem from './components/AddItem.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Header, ItemsLayout , AddItem
+  },
+  data:() => {
+    return {
+      items: [],
+      maxItem: 10,
+    }
+  },
+  methods: {
+    addItemParent(item){
+      this.items.push(item);
+    },
+    delItem(index){
+      this.items.splice(index, 1);
+    },
+  },
 }
 </script>
 
@@ -21,6 +43,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 </style>
