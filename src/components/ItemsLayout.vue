@@ -10,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item,index) in propsItems" :key="index" class="tr-item" @click="editItem(item)">
+                <tr v-for="(item,index) in propsItems" :key="index" class="tr-item" :data="item">
                     <td>{{ index + 1 }}</td>
                     <td>{{ item }}</td>
                     <td><button @click.stop="delItem(index)" class="btn btn-danger">Del</button></td>
@@ -30,9 +30,6 @@ export default {
         delItem(index){
             this.$emit('deleted-item', index);
         },
-        editItem(item){
-            alert(item);
-        }
     },
 }
 </script>
